@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <script src="popup.js"></script>
+	<style>
+		#popup-container {
+			
+			width: 170px;
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+			margin:0px;
+		}
+		header {
+			height:20px;
+		}
+		.container {
+			border-top: 1px solid;
+		}
+		button {
+			background:light-gray;
+			display:block;
+			margin:1px;
+			font-size: 12px;
+			padding: 2px;
+			float: left;
+			border-width: 0px;
+		}
+		label {
+			font-size: 10px;
+			margin-left:10px;
+		}
+		#menu-group {
+			width:100%;
+		}
+		#group-list {
+			margin-top:25px
+		}
+		#item-list{
+			width:100%;
+			display: table;
+			margin: 0 auto;
+		}
+	</style>
+  </head>
+  <body>
+    <div id="popup-container">
+		<header><b>...Muchachow...</b></header>
+		<label for="group-container">Groups</label>
+		<div id="group-container" class="container">
+			<div id="group-menu">
+				<input type="text" id="group-name-input" size="12">
+				<button id="add-new-group-button" class="button">new</div>
+				
+				<button id="clear-all-button" class="button">drop</div>
+			</div>
+			<div id="group-list">
+			</div>
+		</div>
+		<label for="item-container">Items</label>
+		<div id="item-container" class="container">
+			<div id="item-menu">
+			</div>
+			<label for="item-list" id="for-item-list"></label>
+			<div id="item-list">
+			</div>
+		</div>
+	</div>
+  </body>
+</html>
+

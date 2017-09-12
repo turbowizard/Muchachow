@@ -1,0 +1,20 @@
+{
+	"manifest_version": 2,
+   "description": "Simple description here...",
+   "icons": {
+      "16": "m1616.png",
+	  "48": "m4848.png",
+	  "128": "m128128.png"
+   },
+   "minimum_chrome_version": "6",
+   "name": "Muchachow",
+   "permissions": [ "contextMenus", "tabs", "activeTab", "storage"],
+   "version": "1.0",
+   "background": {
+    "scripts": ["bg.js"]
+	},
+	"browser_action": {
+    "default_icon": "m1616.png",
+    "default_popup": "popup.html"
+  }
+}
