@@ -21,6 +21,7 @@
 * Click on the Muchachow extension to see what have you captured.  
 * Go haed and add the link on the first line of this part, previous step to see change.  
 * You can now click the Exp button to expand group in new tab.
+* You can find an example to import in the example groups folder, just copy json to import input.
 * Done! Read next part for notes.  
 ## Notes
 * Project is under development.
@@ -28,6 +29,8 @@
 * You can:
   * Groups:  
     * Create new groups(extension) - name input, click new.
+	* Import a group(extension) - json group input, click import.
+	* Restore extension to default(extension) - click Drop.
     * Delete group(extension) - click del on group menu.
     * Expand group(extension) - click exp on group menu, expand in new tab.
     * Group navigation(extension) - click on group name to switch active.
