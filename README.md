@@ -1,5 +1,6 @@
 # Muchachow 
-Chrome extension for collection and managment of web data  
+'Chrome extension for collection and managment of web data'  
+
 ## Installation
 * Download [muchachow.crx](muchachow.crx)
 * Open your chrome browser.
@@ -19,7 +20,7 @@ Chrome extension for collection and managment of web data
 * This Element can be captured as image or a link, click on "IMAGE -> Muchachow".  
 * Click on the Muchachow extension to see what have you captured.  
 * Go haed and add the link on the first line of this part, previous step to see change.  
-* You can now click the Exp button to exanpd group in new tab.
+* You can now click the Exp button to expand group in new tab.
 * Done! Read next part for notes.  
 ## Notes
 * Project is under development.
@@ -28,16 +29,28 @@ Chrome extension for collection and managment of web data
   * Groups:  
     * Create new groups(extension) - name input, click new.
     * Delete group(extension) - click del on group menu.
-    * Expand group(extension) - click exp on group menu, expand in new tab with json.
+    * Expand group(extension) - click exp on group menu, expand in new tab.
     * Group navigation(extension) - click on group name to switch active.
+	* Get group JSON(expand) - exp group to get json.
   * Items:
     * Items shown under "items"(extension) are from active group.
     * Item interact(extension) - click link to open, hover token to see text.
 * Done! Read next for contributing 
 ## Contributing
-* Fork it (https://github.com/turbowizard/Muchachow/fork)
-* Create your feature branch (`git checkout -b feature/fooBar`)
-* Commit your changes (`git commit -am 'Add some fooBar'`)
-* Push to the branch (`git push origin feature/fooBar`)
-* Create a new Pull Request
-* Done!
+* Suggest improvments, concept utilizations.
+* Make some changes:
+  * Fork it (https://github.com/turbowizard/Muchachow/fork)
+  * Create your feature branch (`git checkout -b feature/fooBar`)
+  * __Test your extension changes with Chrome__.
+  * Commit your changes (`git commit -am 'Add some fooBar'`)
+  * Push to the branch (`git push origin feature/fooBar`)
+  * Create a new Pull Request. 
+
+*__Test your extension changes with Chrome__ (how to load unpacked extension):  
+* Access "Extensions":
+  * chrome://extensions/ ,or
+  * Chrome menu -> More tools -> Extensions.
+* Tick "Developer mode" to enable it.
+* Click "Load unpacked extension".
+* Navigate to project's folder.
+* Click ok.
