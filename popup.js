@@ -23,6 +23,18 @@ document.addEventListener('DOMContentLoaded', function() {
 						}
 					});
 			});
+			
+			document.getElementById("import-group-button").addEventListener("click", function(){
+				chrome.extension.sendMessage({message: "IMPORTGROUP",json:document.getElementById('group-json-input').value},
+					function (response) {
+						if(response.status == 'fail'){
+							alert(response.add);
+						}
+						else{
+							location.reload();
+						}
+					});
+			});
 			//load popup
 			//get all groups + active for marking
 			chrome.extension.sendMessage({message: "GETGROUPS"},

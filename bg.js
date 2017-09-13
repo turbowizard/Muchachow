@@ -22,7 +22,7 @@ function initScheme(){
 	activeGroup = DEFAULT_ACTIVE_GROUP_NAME;
 	updateContextMenu();
 	userGroups.push(DEFAULT_USER_GROUP_NAME);
-	groupItems[DEFAULT_USER_GROUP_NAME] = {links:[],selections:[],images:[]};
+	groupItems[DEFAULT_USER_GROUP_NAME] = {name:DEFAULT_USER_GROUP_NAME,links:[],selections:[],images:[]};
 	
 }
 
@@ -65,7 +65,7 @@ function addUserGroup(userGroupName){
 	userGroups.push(userGroupName);
 	activeGroup = userGroupName;
 	updateContextMenu();
-	groupItems[userGroupName] = {links:[],selections:[],images:[]};	
+	groupItems[userGroupName] = {name:userGroupName,links:[],selections:[],images:[]};	
 }
 
 function deleteUserGroup(userGroupName){
@@ -93,6 +93,13 @@ function inUserGroups(group){
 }
 function expandUserGroup(userGroupName){
 	chrome.tabs.create({ url: chrome.extension.getURL('group.html')+'?q='+userGroupName});
+}
+
+function importUserGroup(jsonGroup){
+	userGroups.push(jsonGroup.name);
+	activeGroup = jsonGroup.name;
+	updateContextMenu();
+	groupItems[jsonGroup.name] = jsonGroup;	
 }
 			
 chrome.extension.onMessage.addListener( function(request,sender,sendResponse)
@@ -155,6 +162,26 @@ chrome.extension.onMessage.addListener( function(request,sender,sendResponse)
 		console.log('got '+request.message+', '+request.to);
 		expandUserGroup(request.to);
 		sendResponse( {status:'ok'} );  
+    }
+	else if( request.message === "IMPORTGROUP" )
+    {
+		console.log('got '+request.message );
+		var sendback = {status:'ok',add:''}
+		if (request.json == ""){
+			sendback.status = 'fail'
+			sendback.add = 'json input is empty';
+		}
+		else{
+			jsonGroup = JSON.parse(request.json);
+			if(inUserGroups(jsonGroup.name)){
+				sendback.status = 'fail'
+				sendback.add = 'group name must be uniqe';
+			}
+			else{
+				importUserGroup(jsonGroup);
+			}
+		}
+		sendResponse( sendback );   
     }
 });
 
