@@ -42,6 +42,15 @@ document.addEventListener('DOMContentLoaded', function() {
 						for (var i=0, l=response.status.length; i<l; i++) {
 							var groupBlock = document.createElement('div');
 							groupBlock.style.display = 'inline-block';
+							if(response.gstatus){
+								var groupStatus = document.createElement('div');
+								groupStatus.style.width="8px";
+								groupStatus.style.height="14px";
+								groupStatus.style.display="block";
+								groupStatus.style.float="left";
+								groupStatus.style.background=response.gstatus[response.status[i]];
+								groupBlock.appendChild(groupStatus);
+							}
 							var groupName = document.createElement('div');
 							groupBlock.id = response.status[i];
 							groupName.innerHTML = response.status[i];

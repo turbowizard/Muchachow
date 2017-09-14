@@ -7,6 +7,8 @@ var activeGroup = 'default-group';
 var userGroups;
 var groupItems;
 var contextsSupported = ["link","selection","image"];
+var opts = {'decayMode':{'enabled':true,'decay':120}}; //H
+var timeFactor = 1000*60*60;
 
 function frameStatusLog(){
 	console.log("log");
@@ -65,7 +67,9 @@ function addUserGroup(userGroupName){
 	userGroups.push(userGroupName);
 	activeGroup = userGroupName;
 	updateContextMenu();
-	groupItems[userGroupName] = {name:userGroupName,links:[],selections:[],images:[]};	
+	var d = new Date();
+	groupItems[userGroupName] = {name:userGroupName,regDate:d.getTime(),mark:'green',links:[],selections:[],images:[]};
+	console.log(groupItems[userGroupName]);
 }
 
 function deleteUserGroup(userGroupName){
@@ -99,9 +103,36 @@ function importUserGroup(jsonGroup){
 	userGroups.push(jsonGroup.name);
 	activeGroup = jsonGroup.name;
 	updateContextMenu();
+	var d = new Date();
+	jsonGroup.regDate = d.getTime();
 	groupItems[jsonGroup.name] = jsonGroup;	
 }
+ function decayHandler(){
+	var now = new Date();
+	var status = {};
+	for (var i=0, l=userGroups.length; i<l; i++) {
+		if(userGroups[i] == DEFAULT_USER_GROUP_NAME){
+		}
+		else{
+			var timeDiff = now.getTime() - groupItems[userGroups[i]].regDate;
+			if(timeDiff > (opts['decayMode'].decay*timeFactor)){
+				deleteUserGroup(userGroups[i]);
+			}
+			else if(timeDiff > (opts['decayMode'].decay*timeFactor/10*7)){
+				status[userGroups[i]] = 'red';				
+			}
+			else if(timeDiff > (opts['decayMode'].decay*timeFactor/10*4)){
+				status[userGroups[i]] = 'yellow';				
+			}
+			else{
+				status[userGroups[i]] = 'green'	;			
+			}
 			
+		}
+	}
+	return status;
+
+} 
 chrome.extension.onMessage.addListener( function(request,sender,sendResponse)
 {
     if( request.message === "DROP" )
@@ -128,9 +159,13 @@ chrome.extension.onMessage.addListener( function(request,sender,sendResponse)
 		sendResponse( sendback );   
     }
 	else if( request.message === "GETGROUPS" )
-    {
+    {	
+		
 		console.log('got '+request.message );
-		frameStatusLog();
+		if(opts['decayMode'].enabled){
+			var groupsStatus = decayHandler();
+			sendResponse( {status:userGroups, active:activeGroup, gstatus:groupsStatus} ); 
+		}
 		sendResponse( {status:userGroups, active:activeGroup} );  
     }
 	else if( request.message === "GETACTIVEITEMS" )

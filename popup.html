@@ -4,15 +4,15 @@
     <title></title>
     <script src="popup.js"></script>
 	<style>
-		#popup-container {
-			
-			width: 170px;
+		#popup-container {			
+			width: 140px;
 			font-family: "Trebuchet MS", Helvetica, sans-serif;
 			margin:0px;
 		}
 		header {
-			height:20px;
-		}
+			width:100%;
+			display:block;
+		}	
 		.container {
 			border-top: 1px solid;
 		}
@@ -44,17 +44,19 @@
   </head>
   <body>
     <div id="popup-container">
-		<header><b>...Muchachow...</b></header>
+		<header>
+			<b>...Muchachow...</b>
+		</header>
 		<label for="group-container">Groups</label>
 		<div id="group-container" class="container">
 			<div id="group-menu">
 				<input type="text" id="group-name-input" size="12">
-				<button id="add-new-group-button" class="button">new</div>
+				<button id="add-new-group-button" class="button">new</button>
 				
 				<input type="text" id="group-json-input" size="10">
-				<button id="import-group-button" class="button">import</div>
+				<button id="import-group-button" class="button">import</button>
 				
-				<button id="clear-all-button" class="button">drop</div>
+				<button id="clear-all-button" class="button">drop</button>
 			</div>
 			<div id="group-list">
 			</div>

@@ -1,6 +1,5 @@
 # Muchachow 
-'Chrome extension for collection and managment of web data'  
-
+Chrome extension for collection and managment of web data   
 ## Installation
 * Download [muchachow.crx](muchachow.crx)
 * Open your chrome browser.
@@ -15,7 +14,8 @@
 *make sure you have the extension ![](m1616.png) . if not, read previous part.    
 * Click on the Muchachow extension (extension toolbar).  
 * Type Muchachow in the input field and click new to create new group.  
-* The Muchachow group is marked green and it is now Active! (all captured are added to it).    
+* The Muchachow group is marked light-green and it is now Active! (all captured are added to it).  
+* The green box left to the group name is the "group status", new groups will decay over time. 
 * Right click on the icon 3 lines above and click on Muchachow's options.  
 * This Element can be captured as image or a link, click on "IMAGE -> Muchachow".  
 * Click on the Muchachow extension to see what have you captured.  
@@ -41,6 +41,7 @@
 * Done! Read next for contributing 
 ## Contributing
 * Suggest improvments, concept utilizations.
+* Share your groups.
 * Make some changes:
   * Fork it (https://github.com/turbowizard/Muchachow/fork)
   * Create your feature branch (`git checkout -b feature/fooBar`)
@@ -57,3 +58,10 @@
 * Click "Load unpacked extension".
 * Navigate to project's folder.
 * Click ok.
+## Change Log
+* Group decay system added.
+  * Color left of group name indicates group's status.
+  * Color will change over time:
+	* Full decay after 5 days, group will be deleted.
+    * Green - 0% ,yellow - 40% ,red - 70% (of decay time).
+	* Imported groups will set to time on import.
