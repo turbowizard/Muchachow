@@ -1,53 +1,60 @@
 
 console.log("loading group content script");
-
+function buildLinkb(param) {
+	//https://stackoverflow.com/questions/11773190/chrome-extension-get-parameter-from-url
+    var val = document.URL;
+    var url = val.substr(val.indexOf(param)) 
+    var n=url.replace(param+"=","");
+	return n
+}
+    
 document.addEventListener('DOMContentLoaded', function() {
-			console.log("DOMContentLoaded")
-						chrome.extension.sendMessage({message: "GETACTIVEITEMS"},
-							function (response) {
-								var jsonexport = JSON.stringify(response.status);
-								document.getElementById('export-json').innerHTML = jsonexport;
-								console.log('rendering item block');
-								console.log(response.status.links);
-								var linkBlock = document.createElement('div');
-								console.log("loading links");
-								for (var i=0, l=response.status.links.length; i<l; i++) {
-									var li = document.createElement('li');
-									var aa = document.createElement('a');
-									aa.id = "link"+i;
-									aa.href = response.status.links[i].linkUrl;
-									aa.text = response.status.links[i].linkUrl.substr(0, 30);
-									aa.width = "100px";
-									aa.target = '_newtab';
-									aa.padding = "5px";
-									li.appendChild(aa);
-									linkBlock.appendChild(li);								
-								}
-								document.getElementById('item-list').appendChild(linkBlock);
-								
-								var selectionBlock = document.createElement('div');
-								for (var i=0, l=response.status.selections.length; i<l; i++) {
-								var selectionItem = document.createElement('div');
-								selectionItem.innerHTML = response.status.selections[i].selectionText;
-								selectionItem.id = "selection"+i;
-								selectionBlock.appendChild(selectionItem);
-							}
-							document.getElementById('item-list').appendChild(selectionBlock);
-							console.log("loading images");
-								var imageBlock = document.createElement('div');
-								imageBlock.id = 'image-items';
-								imageBlock.style.display = 'inline-block';
-								imageBlock.style.cssText = 'margin-top:12px';
-								for (var i=0, l=response.status.images.length; i<l; i++) {
-									var imageItem = document.createElement('img');
-									imageItem.src = response.status.images[i].srcUrl;
-									imageItem.style.cssText = 'float:left;height:120px;background:grey;display:block;margin:5px';
-									imageItem.id = "image"+i;
-									imageBlock.appendChild(imageItem);
-								}
-								document.getElementById('item-list').appendChild(imageBlock);
-					
-						});
-					});
+	console.log("DOMContentLoaded");
+	topic = buildLinkb("q");
+	chrome.extension.sendMessage({message: "GETEXPANDITEMS",to:topic},
+		function (response) {
+			//{name:userGroupName,regDate:d.getTime(),mark:'green',items:[]};
+			var group = {name:topic,items:response.status}
+			var jsonexport = JSON.stringify(group);
+			var jeta = document.createElement("TEXTAREA");
+			jeta.value = jsonexport;
+			jeta.cols = "100";
+			jeta.rows = "8";
+			document.getElementById('export-json').appendChild(jeta);
+			for (var i=0, l=response.status.length; i<l; i++) {
+				var itemBlock = document.createElement('div');
+				itemBlock.id = 'item'+i;
+				itemBlock.style.display ="block";	
+				itemBlock.style.width ="100%";	
+				itemBlock.style.height ="20px";
+				itemBlock.style.marginTop = "2px";
+				var bg = '';
+				if(response.status[i].mType == 'link'){
+					var aa = document.createElement('a');
+					aa.href = response.status[i].linkUrl;
+					aa.target = '_newtab';
+					aa.text = response.status[i].linkUrl;
+					itemBlock.appendChild(aa);
+					itemBlock.title = response.status[i].linkUrl;
+					bg = '#d6f6ff';
+				}
+				else if(response.status[i].mType == 'selection'){
+					itemBlock.innerHTML = response.status[i].selectionText;
+					bg = '#d6d7ff';
+				}
+				else if(response.status[i].mType == 'image'){
+					itemBlock.innerHTML = response.status[i].srcUrl;
+					bg = '#f2d6ff';
+				}
+				else{
+					itemBlock.innerHTML = 'No_Item_mType Err'
+					bg = 'red';
+				}
+				itemBlock.style.background = bg;
+				
+				document.getElementById('item-list').appendChild(itemBlock);
+			}					
+		});
+});
 					
     

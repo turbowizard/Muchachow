@@ -2,7 +2,7 @@
 var THE_NAME = 'Muchachow';
 var DEFAULT_ACTIVE_GROUP_NAME = 'default-group';
 var DEFAULT_USER_GROUP_NAME = 'default-group';
-var EMPTY_GROUP = {links:[],selections:[],images:[]};
+//var EMPTY_GROUP = {links:[],selections:[],images:[]};
 var activeGroup = 'default-group';
 var userGroups;
 var groupItems;
@@ -24,7 +24,7 @@ function initScheme(){
 	activeGroup = DEFAULT_ACTIVE_GROUP_NAME;
 	updateContextMenu();
 	userGroups.push(DEFAULT_USER_GROUP_NAME);
-	groupItems[DEFAULT_USER_GROUP_NAME] = {name:DEFAULT_USER_GROUP_NAME,links:[],selections:[],images:[]};
+	groupItems[DEFAULT_USER_GROUP_NAME] = {name:DEFAULT_USER_GROUP_NAME,items:[]};
 	
 }
 
@@ -32,14 +32,21 @@ function initScheme(){
 initScheme();
 
 function onClickHandler(info, tab) {
-	if(info.menuItemId == "linkToGroup"){
-		groupItems[activeGroup].links.push(info);
+	var clickSource = info.menuItemId;
+	delete info['frameId'];
+	delete info['menuItemId'];
+	delete info['parentMenuItemId'];
+	if(clickSource == "linkToGroup"){
+		info['mType'] = 'link'
+		groupItems[activeGroup].items.push(info);
 	} 
-	else if(info.menuItemId == "selectionToGroup"){
-		groupItems[activeGroup].selections.push(info);
+	else if(clickSource == "selectionToGroup"){
+		info['mType'] = 'selection'
+		groupItems[activeGroup].items.push(info);
 	}
-	else if(info.menuItemId == "imageToGroup"){
-		groupItems[activeGroup].images.push(info);
+	else if(clickSource == "imageToGroup"){
+		info['mType'] = 'image'
+		groupItems[activeGroup].items.push(info);
 	} 
 };
 chrome.contextMenus.onClicked.addListener(onClickHandler);
@@ -68,7 +75,7 @@ function addUserGroup(userGroupName){
 	activeGroup = userGroupName;
 	updateContextMenu();
 	var d = new Date();
-	groupItems[userGroupName] = {name:userGroupName,regDate:d.getTime(),mark:'green',links:[],selections:[],images:[]};
+	groupItems[userGroupName] = {name:userGroupName,regDate:d.getTime(),mark:'green',items:[]};
 	console.log(groupItems[userGroupName]);
 }
 
@@ -84,7 +91,11 @@ function deleteUserGroup(userGroupName){
 }
 
 function getActiveItems(){
-	return groupItems[activeGroup];
+	return groupItems[activeGroup].items;
+}
+
+function getGroupItems(groupName){
+	return groupItems[groupName].items;
 }
 
 function inUserGroups(group){
@@ -197,6 +208,11 @@ chrome.extension.onMessage.addListener( function(request,sender,sendResponse)
 		console.log('got '+request.message+', '+request.to);
 		expandUserGroup(request.to);
 		sendResponse( {status:'ok'} );  
+    }
+	else if( request.message === "GETEXPANDITEMS" )
+    {
+		console.log('got '+request.message );
+		sendResponse( {status:getGroupItems(request.to),name:request.to} );   
     }
 	else if( request.message === "IMPORTGROUP" )
     {

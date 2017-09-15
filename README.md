@@ -1,5 +1,6 @@
 # Muchachow 
-Chrome extension for collection and managment of web data   
+Muchachow is a under development POC Chorme extension for collection and managment of web data  
+built for easy micro-scraping.   
 ## Installation
 * Download [muchachow.crx](muchachow.crx)
 * Open your chrome browser.
@@ -59,6 +60,7 @@ Chrome extension for collection and managment of web data
 * Navigate to project's folder.
 * Click ok.
 ## Change Log
+* Item handling changed to generic, import issue fixed.
 * Group decay system added.
   * Color left of group name indicates group's status.
   * Color will change over time:
