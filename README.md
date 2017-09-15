@@ -17,7 +17,7 @@ built for easy micro-scraping.
 * Type Muchachow in the input field and click new to create new group.  
 * The Muchachow group is marked light-green and it is now Active! (all captured are added to it).  
 * The green box left to the group name is the "group status", new groups will decay over time. 
-* Right click on the icon 3 lines above and click on Muchachow's options.  
+* Right click on the icon 5 lines above and click on Muchachow's options.  
 * This Element can be captured as image or a link, click on "IMAGE -> Muchachow".  
 * Click on the Muchachow extension to see what have you captured.  
 * Go haed and add the link on the first line of this part, previous step to see change.  
