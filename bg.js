@@ -28,7 +28,7 @@ function initScheme(){
 	
 }
 
-//generate scheme
+//generate model
 initScheme();
 
 function onClickHandler(info, tab) {
@@ -36,18 +36,21 @@ function onClickHandler(info, tab) {
 	delete info['frameId'];
 	delete info['menuItemId'];
 	delete info['parentMenuItemId'];
+	var d = new Date();
 	if(clickSource == "linkToGroup"){
-		info['mType'] = 'link'
-		groupItems[activeGroup].items.push(info);
+		info['mType'] = 'link';
 	} 
 	else if(clickSource == "selectionToGroup"){
-		info['mType'] = 'selection'
-		groupItems[activeGroup].items.push(info);
+		info['mType'] = 'selection';
 	}
 	else if(clickSource == "imageToGroup"){
-		info['mType'] = 'image'
-		groupItems[activeGroup].items.push(info);
-	} 
+		info['mType'] = 'image';
+	}
+	else{
+		info['mType'] = 'NOT SUPPORTED';
+	}	
+	groupItems[activeGroup].items.push(info);
+	groupItems[activeGroup].regDate = d.getTime();
 };
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 

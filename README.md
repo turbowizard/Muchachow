@@ -11,8 +11,8 @@ built for easy micro-scraping.
 * click "Add extension".
 * Done! Read next part for usage.
 ## Usage
-*if your are not on github, open [Muchachow's README on Github](https://github.com/turbowizard/Muchachow/blob/master/README.md) with Chrome.  
-*make sure you have the extension ![](m1616.png) . if not, read previous part.    
+* if your are not on github, open [Muchachow's README on Github](https://github.com/turbowizard/Muchachow/blob/master/README.md) with Chrome.  
+* make sure you have the extension ![](m1616.png) . if not, read previous part (or reload page).    
 * Click on the Muchachow extension (extension toolbar).  
 * Type Muchachow in the input field and click new to create new group.  
 * The Muchachow group is marked light-green and it is now Active! (all captured are added to it).  
@@ -20,7 +20,7 @@ built for easy micro-scraping.
 * Right click on the icon 5 lines above and click on Muchachow's options.  
 * This Element can be captured as image or a link, click on "IMAGE -> Muchachow".  
 * Click on the Muchachow extension to see what have you captured.  
-* Go haed and add the link on the first line of this part, previous step to see change.  
+* Go ahead and add the link on the first line of this part, previous step to see change.  
 * You can now click the Exp button to expand group in new tab.
 * You can find an example to import in the example groups folder, just copy json to import input.
 * Done! Read next part for notes.  
@@ -38,7 +38,7 @@ built for easy micro-scraping.
 	* Get group JSON(expand) - exp group to get json.
   * Items:
     * Items shown under "items"(extension) are from active group.
-    * Item interact(extension) - click link to open, hover token to see text.
+    * Item interact(extension) - click link to open, hover item to see text.
 * Done! Read next for contributing 
 ## Contributing
 * Suggest improvments, concept utilizations.
@@ -60,6 +60,7 @@ built for easy micro-scraping.
 * Navigate to project's folder.
 * Click ok.
 ## Change Log
+* Group decay clock resets on item addition, html fixes.
 * Item handling changed to generic, import issue fixed.
 * Group decay system added.
   * Color left of group name indicates group's status.
