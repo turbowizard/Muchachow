@@ -1,5 +1,5 @@
 # Muchachow 
-Muchachow is a under development POC Chorme extension for collection and managment of web data  
+Muchachow is a tool for  web data collection and managment.
 built for easy micro-scraping.   
 ## Installation
 * Download [muchachow.crx](muchachow.crx)
